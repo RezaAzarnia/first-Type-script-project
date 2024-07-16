@@ -1,10 +1,6 @@
 import Cart from "../../components/Cart";
-type Product = {
-  id: number;
-  productName: string;
-  productImg: string;
-  price: number;
-};
+import { Product } from "../../components/types";
+
 const products: Product[] = [
   {
     id: 1,
@@ -31,7 +27,7 @@ const Index = () => {
       <h1 className="text-3xl text-center uppercase mb-5 ">
         this is our products
       </h1>
-      <div className="grid grid-cols-3 grid-rows-[400px] gap-3">
+      <div className="grid grid-cols-3 gap-5">
         {products?.map((product) => <Cart {...product} key={product.id} />)}
       </div>
     </>

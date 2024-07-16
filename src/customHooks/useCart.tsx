@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from "react";
 import { cartContext } from "../context/CartContext";
+import { Product } from "../components/types";
 
 enum REDUCER_ACTIONS {
   ADD_TO_CART,
@@ -7,13 +8,7 @@ enum REDUCER_ACTIONS {
   CLEAR_CART,
   UPDATE_QUANTITY,
 }
-type Product = {
-  id: number;
-  productName: string;
-  productImg: string;
-  price: number;
-  quantity?: number;
-};
+
 const useCart = () => {
   const context = useContext(cartContext);
 
@@ -23,7 +18,6 @@ const useCart = () => {
 
   const addToCart = useCallback(
     (product: Product): void => {
-      console.log("im calling add to cart");
       dispatch({
         type: REDUCER_ACTIONS.ADD_TO_CART,
         payload: product,
@@ -34,7 +28,6 @@ const useCart = () => {
 
   const deleteCartItem = useCallback(
     (productId: number): void => {
-      console.log("i'm calling delete from cart");
       dispatch({
         type: REDUCER_ACTIONS.DELETE_FROM_CART,
         payload: productId,
@@ -44,20 +37,21 @@ const useCart = () => {
   );
 
   const clearCart = () => {
-    console.log("calling clear");
     dispatch({ type: REDUCER_ACTIONS.CLEAR_CART });
   };
 
-  const totalPrice = useMemo((): number => {
-    // console.log("i'm calling calclaute");
-    return state.reduce((accumulator: number, current: Product): number => {
-      return (accumulator += current.price * current.quantity!);
-    }, 0);
+  const totalPrice = useMemo((): string => {
+    const price = state.reduce(
+      (accumulator: number, current: Product): number => {
+        return (accumulator += current.price * current.quantity!);
+      },
+      0
+    );
+    return price.toFixed(2);
   }, [state]);
 
   const isInCart = useCallback(
     (productId: number): boolean => {
-      console.log("check if is Exist");
       return state.some((item: Product) => item.id == productId);
     },
     [state]

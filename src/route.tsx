@@ -1,6 +1,6 @@
-import Cart from "./Pages/Cart/Cart";
 import Layout from "./components/Layout";
 import Index from "./Pages/Index/Index";
+import UserCart from "./Pages/UserCart/UserCart";
 
 export const route = [
   {
@@ -8,7 +8,7 @@ export const route = [
     element: <Layout />,
     children: [
       { path: "/", element: <Index /> },
-      { path: "/cart", element: <Cart /> },
+      { path: "/cart", element: <UserCart /> },
     ],
   },
 ];

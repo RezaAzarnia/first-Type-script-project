@@ -1,36 +1,24 @@
-import  useCart  from "../customHooks/useCart";
+import useCart from "../customHooks/useCart";
+import Button from "./Button";
+import { Product } from "./types";
 
-type Cartprops = {
-  id: number;
-  productName: string;
-  productImg: string;
-  price: number;
-};
-
-const Cart = (props: Cartprops): JSX.Element => {
+const Cart = (props: Product): JSX.Element => {
   const { addToCart, isInCart } = useCart();
+
   const { id, productName, productImg, price } = props;
+
   return (
-    <div className="flex flex-col p-2 border border-lime-900 w-full">
-      <div className="w-full h-2/3">
-        <img src={productImg} className="w-full h-full object-fill" />
+    <div className="flex flex-col p-2 border border-gray-400 w-full rounded">
+      <div className="w-full h-2/3 max-h-72">
+        <img src={productImg} className="w-full h-full object-fill scale-75" />
       </div>
 
-      <div className="mt-auto text-center">
+      <div className="mt-auto text-center space-y-2">
         <h3 className="text-xl capitalize font-semibold">{productName}</h3>
         <p>${price}</p>
-        {isInCart(id) ? <span>in the cart ✔</span> : ""}
-        <span></span>
+        {isInCart(id) ? <p className="text-green-900">in the cart ✔</p> : ""}
       </div>
-
-      <button
-        className="mt-auto bg-purple-900 text-white px-4 py-2 rounded-md capitalize 
-      hover:bg-purple-950 transition-colors
-      "
-        onClick={() => addToCart(props)}
-      >
-        add to cart
-      </button>
+      <Button onClick={() => addToCart(props)}>add to cart</Button>
     </div>
   );
 };

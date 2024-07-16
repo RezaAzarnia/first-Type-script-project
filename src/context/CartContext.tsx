@@ -1,12 +1,7 @@
 import { ReactNode, createContext, useMemo, useReducer } from "react";
+import { Product } from "../components/types";
 
-type Product = {
-  id: number;
-  productName: string;
-  productImg: string;
-  price: number;
-  quantity?: number;
-};
+
 enum REDUCER_ACTIONS {
   ADD_TO_CART,
   DELETE_FROM_CART,
